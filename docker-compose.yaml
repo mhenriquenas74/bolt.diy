@@ -7,12 +7,14 @@ services:
       target: bolt-ai-production
     ports:
       - '5173:5173'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     environment:
-      - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL}
-      - LMSTUDIO_API_BASE_URL=${LMSTUDIO_API_BASE_URL}
-      - OPENAI_LIKE_API_BASE_URL=${OPENAI_LIKE_API_BASE_URL}
-      - OPENAI_LIKE_API_KEY=${OPENAI_LIKE_API_KEY}
-      - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX}
+      - OLLAMA_API_BASE_URL=${OLLAMA_API_BASE_URL:-}
+      - LMSTUDIO_API_BASE_URL=${LMSTUDIO_API_BASE_URL:-}
+      - OPENAI_LIKE_API_BASE_URL=${OPENAI_LIKE_API_BASE_URL:-}
+      - OPENAI_LIKE_API_KEY=${OPENAI_LIKE_API_KEY:-}
+      - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
       - RUNNING_IN_DOCKER=true
 
   app-dev:
