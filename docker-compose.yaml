@@ -16,7 +16,11 @@ services:
       - OPENAI_LIKE_API_KEY=${OPENAI_LIKE_API_KEY:-}
       - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
       - RUNNING_IN_DOCKER=true
-
+    labels:
+      - "traefik.http.middlewares.bolt-coep.headers.customResponseHeaders.Cross-Origin-Embedder-Policy=require-corp"
+      - "traefik.http.middlewares.bolt-coep.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin"
+      - "traefik.http.routers.https-0-t107vz00hto34tbg10o37kea.middlewares=bolt-coep"
+      
   app-dev:
     image: bolt-ai:development
     build:
